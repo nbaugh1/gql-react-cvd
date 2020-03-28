@@ -4,23 +4,25 @@ import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
 import logo from './logo.jpg'
+import StatesList from './components/States'
 
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
 
 function App () {
+  const client = new ApolloClient({
+    uri: 'http://localhost:4000/graphql'
+  })
   return (
     <ApolloProvider client={client}>
     <Router>
       <div className='container'>
       <img
           src={logo}
-          alt='SpaceX'
+          alt='Covid-19'
           style={{ height:200, margin: 'auto', display: 'block' }}
         />
-       <h1>Home</h1>
+       <h1>Covid-19 Tracker</h1>
+        <Route exact path="/" component={StatesList} />
       </div>
       </Router>
     </ApolloProvider>
