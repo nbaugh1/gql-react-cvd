@@ -85,6 +85,7 @@ class CovidAPI extends RESTDataSource {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
   dataSources: () => {
     return {
       covidAPI: new CovidAPI(),
