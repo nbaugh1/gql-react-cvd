@@ -1,14 +1,60 @@
-const express = require('express')
-const graphqlHTTP = require('express-graphql')
-const schema = require('./schema')
+const { ApolloServer, gql } = require('apollo-server');
+const { RESTDataSource } = require('apollo-datasource-rest');
+const axios = require('axios');
 
-const app = express();
 
-app.use('/graphql', graphqlHTTP({
-    schema,
-    graphiql: true
-}));
 
-const PORT = process.env.PORT || 5000; 
+const typeDefs = gql`
+type Query {
+    location(name: String!): Location
+  }
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+  type Location {
+    country: String,
+    cases: Int,
+    todayCases: Int,
+    deaths: Int,
+    todayDeaths: Int,
+    recovered: Int,
+    active: Int,
+    critical: Int,
+    casesPerOneMillion: Float,
+    deathsPerOneMillion: Float,
+  }
+
+  
+`;
+
+const resolvers = {
+    Query:{
+        location: async (_source, { name }, { dataSources }) => {
+            return dataSources.covidAPI.getLocation(name);
+          }
+        },
+    }
+
+
+class CovidAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://corona.lmao.ninja/';
+  }
+
+  async getLocation(name) {
+    return this.get(`countries/${name}`);
+  }
+}
+
+const server = new ApolloServer({ 
+    typeDefs,
+    resolvers,
+    dataSources: () => {
+        return{
+            covidAPI: new CovidAPI(),
+        }
+    }
+ });
+
+server.listen().then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
