@@ -2,10 +2,9 @@ const { ApolloServer, gql } = require('apollo-server');
 const { RESTDataSource } = require('apollo-datasource-rest');
 const axios = require('axios');
 
-
-
 const typeDefs = gql`
-type Query {
+  
+  type Query {
     country(name: String!): Country,
     summary: Summary,
     states: [State],
@@ -41,7 +40,6 @@ type Query {
     todayDeaths: Int,
     active: Int
   }
-  
 `;
 
 const resolvers = {
@@ -61,7 +59,6 @@ const resolvers = {
   },
 }
 
-
 class CovidAPI extends RESTDataSource {
   constructor() {
     super();
@@ -73,15 +70,15 @@ class CovidAPI extends RESTDataSource {
   }
 
   async getAllCountries() {
-    return this.get(`https://corona.lmao.ninja/countries?sort=country`)
+    return this.get(`https://corona.lmao.ninja/countries?sort=country`);
   }
 
   async getStates() {
-    return this.get(`https://corona.lmao.ninja/states`)
+    return this.get(`https://corona.lmao.ninja/states`);
   }
 
   async getSummary() {
-    return this.get(`https://corona.lmao.ninja/all`)
+    return this.get(`https://corona.lmao.ninja/all`);
   }
 }
 
