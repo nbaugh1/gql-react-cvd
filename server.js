@@ -6,10 +6,13 @@ const axios = require('axios');
 
 const typeDefs = gql`
 type Query {
-    location(name: String!): Location
+    country(name: String!): Country,
+    summary: Summary,
+    states: [State],
+    countries: [Country]
   }
 
-  type Location {
+  type Country {
     country: String,
     cases: Int,
     todayCases: Int,
@@ -22,16 +25,41 @@ type Query {
     deathsPerOneMillion: Float,
   }
 
+  type Summary {
+    cases: Int,
+    deaths: Int,
+    recovered: Int,
+    updated: Int,
+    active: Int
+  }
+
+  type State {
+    state: String,
+    cases: Int,
+    todayCases: Int,
+    deaths: Int,
+    todayDeaths: Int,
+    active: Int
+  }
   
 `;
 
 const resolvers = {
-    Query:{
-        location: async (_source, { name }, { dataSources }) => {
-            return dataSources.covidAPI.getLocation(name);
-          }
-        },
-    }
+  Query: {
+    country: async (_source, { name }, { dataSources }) => {
+      return dataSources.covidAPI.getCountry(name);
+    },
+    summary: async (_source, _, { dataSources }) => {
+      return dataSources.covidAPI.getSummary();
+    },
+    states: async (_source, _, { dataSources }) => {
+      return dataSources.covidAPI.getStates();
+    },
+    countries: async (_source, _, { dataSources }) => {
+      return dataSources.covidAPI.getCountries();
+    },
+  },
+}
 
 
 class CovidAPI extends RESTDataSource {
@@ -40,21 +68,33 @@ class CovidAPI extends RESTDataSource {
     this.baseURL = 'https://corona.lmao.ninja/';
   }
 
-  async getLocation(name) {
+  async getCountry(name) {
     return this.get(`countries/${name}`);
+  }
+
+  async getAllCountries() {
+    return this.get(`https://corona.lmao.ninja/countries?sort=country`)
+  }
+
+  async getStates() {
+    return this.get(`https://corona.lmao.ninja/states`)
+  }
+
+  async getSummary() {
+    return this.get(`https://corona.lmao.ninja/all`)
   }
 }
 
-const server = new ApolloServer({ 
-    typeDefs,
-    resolvers,
-    dataSources: () => {
-        return{
-            covidAPI: new CovidAPI(),
-        }
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => {
+    return {
+      covidAPI: new CovidAPI(),
     }
- });
+  }
+});
 
 server.listen().then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
-  });
+  console.log(`🚀  Server ready at ${url}`);
+});
