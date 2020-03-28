@@ -10,7 +10,7 @@ import StatesList from './components/States'
 
 function App () {
   const client = new ApolloClient({
-    uri: '/.netlify/functions/graphql'
+    uri: 'http://localhost:4000/graphql'
   })
   return (
     <ApolloProvider client={client}>
