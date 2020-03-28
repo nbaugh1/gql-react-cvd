@@ -28,7 +28,7 @@ export default class StatesList extends Component {
                         return <Fragment>
                             {
                                 data.states.map(state => (
-                                    <p>{state.state}</p>
+                                   <div><p>{state.state}: {state.cases} Cases, {state.deaths} Deaths, {state.todayCases} New cases today, {state.todayDeaths} Deaths today</p></div> 
                                 ))
                             }
                         </Fragment>
