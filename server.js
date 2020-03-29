@@ -1,14 +1,8 @@
 const { ApolloServer, gql } = require('apollo-server');
 const { RESTDataSource } = require('apollo-datasource-rest');
-const graphqlHTTP = require('express-graphql')
-// const app = require('express')
-const express = require('express');
-const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
-const rp = require('request-promise')
 
-const typeDefs = `
+
+const typeDefs = gql`
   
   type Query {
     country(name: String!): Country,
@@ -53,7 +47,6 @@ const resolvers = {
     country: async (_source, { name }, { dataSources }) => {
       return dataSources.covidAPI.getCountry(name);
     },
-    country
     summary: async (_source, _, { dataSources }) => {
       return dataSources.covidAPI.getSummary();
     },
@@ -89,7 +82,7 @@ class CovidAPI extends RESTDataSource {
   }
 }
 
-const schema = new makeExecutableSchema({
+const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => {
@@ -99,18 +92,8 @@ const schema = new makeExecutableSchema({
   }
 });
 
-const app = express();
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Go to http://localhost:3000/graphiql to run queries!');
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
 });
-
-// server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-//   console.log(`🚀 Server ready at ${url}`);
-// });
