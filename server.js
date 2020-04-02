@@ -80,6 +80,9 @@ class CovidAPI extends RESTDataSource {
   async getSummary() {
     return this.get(`https://corona.lmao.ninja/all`);
   }
+  async getHistorical() {
+    return this.get(`https://corona.lmao.ninja/v2/historical`);
+  }
 }
 
 const server = new ApolloServer({
