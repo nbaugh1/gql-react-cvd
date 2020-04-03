@@ -34,12 +34,37 @@ const typeDefs = gql`
 
   type State {
     state: String,
-    cases: Int,
-    todayCases: Int,
-    deaths: Int,
-    todayDeaths: Int,
-    active: Int
+    positive: Int,
+    positiveScore: Int,
+    negativeScore: Int,
+    negativeRegularScore: Int,
+    commercialScore: Int,
+    grade: String,
+    score: Int,
+    negative: Int,
+    pending: Int,
+    hospitalizedCurrently: Int,
+    hospitalizedCumulative: Int,
+    inIcuCurrently: Int,
+    inIcuCumulative: Int,
+    onVentilatorCurrently: Int,
+    onVentilatorCumulative: Int,
+    recovered: Int,
+    lastUpdateEt: String,
+    checkTimeEt: String,
+    death: Int,
+    hospitalized: Int,
+    total: Int,
+    totalTestResults: Int,
+    posNeg: Int,
+    fips: String,
+    dateModified: String,
+    dateChecked: String,
+    notes: String,
+    hash: String
   }
+
+
 `;
 
 const resolvers = {
@@ -74,7 +99,9 @@ class CovidAPI extends RESTDataSource {
   }
 
   async getStates() {
-    return this.get(`https://corona.lmao.ninja/states`);
+    // return this.get(`https://corona.lmao.ninja/states`);
+    return this.get(`https://covidtracking.com/api/v1/states/current.json`);
+
   }
 
   async getSummary() {
