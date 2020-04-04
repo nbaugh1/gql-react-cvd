@@ -25,11 +25,24 @@ const typeDefs = gql`
   }
 
   type Summary {
-    cases: Int,
-    deaths: Int,
+    positive: Int,
+    negative: Int,
+    pending: Int,
+    hospitalizedCurrently: Int,
+    hospitalizedCumulative: Int,
+    inIcuCurrently: Int,
+    inIcuCumulative: Int,
+    onVentilatorCurrently: Int,
+    onVentilatorCumulative: Int,
     recovered: Int,
-    updated: Int,
-    active: Int
+    hash: String,
+    lastModified: String,
+    death: Int,
+    hospitalized: Int,
+    total: Int,
+    totalTestResults: Int,
+    posNeg: Int,
+    notes: String
   }
 
   type State {
@@ -85,30 +98,18 @@ const resolvers = {
 }
 
 class CovidAPI extends RESTDataSource {
-  constructor() {
-    super();
-    this.baseURL = 'https://corona.lmao.ninja/';
-  }
-
-  async getCountry(name) {
-    return this.get(`countries/${name}`);
-  }
-
-  async getAllCountries() {
-    return this.get(`https://corona.lmao.ninja/countries?sort=country`);
-  }
-
+ 
   async getStates() {
-    // return this.get(`https://corona.lmao.ninja/states`);
     return this.get(`https://covidtracking.com/api/v1/states/current.json`);
-
   }
-
+  async getNews(){
+    return this.get(`https://covidtracking.com/api/press`)
+  }
   async getSummary() {
-    return this.get(`https://corona.lmao.ninja/all`);
+    return this.get(`https://covidtracking.com/api/us`);
   }
-  async getHistorical() {
-    return this.get(`https://corona.lmao.ninja/v2/historical`);
+  async getStateHistorical() {
+    return this.get(`https://covidtracking.com/api/v1/states/daily.json`);
   }
 }
 
