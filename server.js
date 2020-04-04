@@ -2,13 +2,15 @@ const { ApolloServer, gql } = require('apollo-server');
 const { RESTDataSource } = require('apollo-datasource-rest');
 
 
+
 const typeDefs = gql`
   
   type Query {
     country(name: String!): Country,
     summary: Summary,
     states: [State],
-    countries: [Country]
+    countries: [Country],
+    state(name: String!): [State]
   }
 
   type Country {
