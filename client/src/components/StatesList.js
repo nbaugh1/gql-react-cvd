@@ -7,12 +7,36 @@ import StateItem from './StateItem'
 const STATES_QUERY = gql`
     {
     states{
-		state
-        positive
-        death
-        hospitalized
-        inIcuCurrently
-	}
+	state
+    positive
+    positiveScore
+    negativeScore
+    negativeRegularScore
+    commercialScore
+    grade
+    score
+    negative
+    pending
+    hospitalizedCurrently
+    hospitalizedCumulative
+    inIcuCurrently
+    inIcuCumulative
+    onVentilatorCurrently
+    onVentilatorCumulative
+    recovered
+    lastUpdateEt
+    checkTimeEt
+    death
+    hospitalized
+    total
+    totalTestResults
+    posNeg
+    fips
+    dateModified
+    dateChecked
+    notes
+    hash	
+    }
 }
 `
 const StatesList = () => {
