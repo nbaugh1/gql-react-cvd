@@ -16,7 +16,7 @@ export default function StateItem ({state}) {
         <div className='col-md-3'>
           <Link
             to={{
-              pathname: `/state/${state}`,
+              pathname: `/state/${state.state}`,
               state: {
                 state
               }
