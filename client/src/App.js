@@ -22,7 +22,7 @@ function App () {
           alt='Covid-19'
           style={{ height: 200, margin: 'auto', display: 'block' }}
         />
-       <h1>Covid-19 Tracker</h1>
+      <h1>Covid-19 Tracker</h1>
         <Route exact path="/" component={StatesListContainer} />
         <Route exact path="/state/:state" component={State} />
       </div>

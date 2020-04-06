@@ -1,5 +1,4 @@
 import React from 'react'
-// import className from "classnames";
 import { Link } from 'react-router-dom'
 
 export default function StateItem ({state}) {
@@ -23,7 +22,7 @@ export default function StateItem ({state}) {
             }}
             className='btn btn-secondary'
           >
-            Launch Details
+          Details
           </Link>
         </div>
       </div>

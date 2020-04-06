@@ -47,7 +47,11 @@ export const StatesListContainer = () => {
     if (error) console.log(error)
     return (
         <Container>
+        
+        <div>
             <StatesList state={data}/>
+        </div>
+            
         </Container>
     )
 }
