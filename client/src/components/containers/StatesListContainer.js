@@ -1,8 +1,9 @@
 import React from 'react'
 import { useQuery } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Form, Container } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
 import StatesList from '../StatesList'
+import StateSearch from '../StateSearch'
 
 const STATES_QUERY = gql`
     {
@@ -47,7 +48,7 @@ export const StatesListContainer = () => {
     if (error) console.log(error)
     return (
         <Container>
-        
+            <StateSearch states={data} />
         <div>
             <StatesList state={data}/>
         </div>
