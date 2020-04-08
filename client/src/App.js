@@ -6,6 +6,7 @@ import './App.css'
 import logo from './logo.jpg'
 import StatesListContainer from './components/containers/StatesListContainer'
 import State from './components/State'
+import Link from 'react-router-dom/Link'
 
 
 
@@ -17,12 +18,12 @@ function App () {
     <ApolloProvider client={client}>
     <Router>
       <div className='container'>
-      <img
+        <img
           src={logo}
           alt='Covid-19'
           style={{ height: 200, margin: 'auto', display: 'block' }}
         />
-      <h1>Covid-19 Tracker</h1>
+        <Link to="/" className='h1'>Covid-19 Tracker</Link>
         <Route exact path="/" component={StatesListContainer} />
         <Route exact path="/state/:state" component={State} />
       </div>
