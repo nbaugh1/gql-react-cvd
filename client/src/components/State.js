@@ -1,4 +1,5 @@
 import React from 'react';
+import Badge from 'react-bootstrap/Badge'
 import Dump from './Dump'
 
 const State = (props) => {
@@ -7,12 +8,23 @@ const State = (props) => {
         <div>
             <h2>{state.state}</h2>
             <ul>
-                <li>Positive Cases - {state.positive}</li>
-                <li>Currently Hospitalized - {state.hospitalizedCurrently}</li>
-                <li>Recovered - {state.recovered}</li>
-                <li>Deaths - {state.death}</li>
-                <li>Last Updated - {state.lastUpdateEt}</li>
+                <li>
+                    Positive Cases - {state.positive} <Badge variant="danger">+{state.positiveIncrease}</Badge>
+                </li>
+                <li>
+                    Currently Hospitalized - {state.hospitalizedCurrently} <Badge variant="danger">+{state.hospitalizedIncrease}</Badge>
+                </li>
+                <li>
+                    Deaths - {state.death} <Badge variant="danger">+{state.deathIncrease}</Badge>
+                </li>
+                <li>
+                    Recovered - {state.recovered}
+                </li>
+                <li>
+                    Last Updated - {state.dateChecked}
+                </li>
             </ul>
+            <Dump data={state} />
         </div>
             )
 }

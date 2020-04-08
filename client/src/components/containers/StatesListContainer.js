@@ -8,35 +8,31 @@ import StateSearch from '../StateSearch'
 const STATES_QUERY = gql`
     {
     states{
-	state
-    positive
-    positiveScore
-    negativeScore
-    negativeRegularScore
-    commercialScore
-    grade
-    score
-    negative
-    pending
-    hospitalizedCurrently
-    hospitalizedCumulative
-    inIcuCurrently
-    inIcuCumulative
-    onVentilatorCurrently
-    onVentilatorCumulative
-    recovered
-    lastUpdateEt
-    checkTimeEt
-    death
-    hospitalized
-    total
-    totalTestResults
-    posNeg
-    fips
-    dateModified
-    dateChecked
-    notes
-    hash	
+        date
+        state
+        positive
+        negative
+        pending
+        hospitalizedCurrently
+        hospitalizedCumulative
+        inIcuCurrently
+        inIcuCumulative
+        onVentilatorCurrently
+        onVentilatorCumulative
+        recovered
+        hash
+        dateChecked
+        death
+        hospitalized
+        total
+        totalTestResults
+        posNeg
+        fips
+        deathIncrease
+        hospitalizedIncrease
+        negativeIncrease
+        positiveIncrease
+        totalTestResultsIncrease    
     }
 }
 `

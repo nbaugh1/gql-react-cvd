@@ -48,14 +48,9 @@ const typeDefs = gql`
   }
 
   type State {
+    date: Int,
     state: String,
     positive: Int,
-    positiveScore: Int,
-    negativeScore: Int,
-    negativeRegularScore: Int,
-    commercialScore: Int,
-    grade: String,
-    score: Int,
     negative: Int,
     pending: Int,
     hospitalizedCurrently: Int,
@@ -65,19 +60,21 @@ const typeDefs = gql`
     onVentilatorCurrently: Int,
     onVentilatorCumulative: Int,
     recovered: Int,
-    lastUpdateEt: String,
-    checkTimeEt: String,
+    hash: String,
+    dateChecked: String,
     death: Int,
     hospitalized: Int,
     total: Int,
     totalTestResults: Int,
     posNeg: Int,
     fips: String,
-    dateModified: String,
-    dateChecked: String,
-    notes: String,
-    hash: String
+    deathIncrease: Int,
+    hospitalizedIncrease: Int,
+    negativeIncrease: Int,
+    positiveIncrease: Int,
+    totalTestResultsIncrease: Int
   }
+
 
 
 `;
@@ -100,11 +97,11 @@ const resolvers = {
 }
 
 class CovidAPI extends RESTDataSource {
- 
+
   async getStates() {
-    return this.get(`https://covidtracking.com/api/v1/states/current.json`);
+    return this.get(`https://covidtracking.com/api/v1/states/daily.json`);
   }
-  async getNews(){
+  async getNews() {
     return this.get(`https://covidtracking.com/api/press`)
   }
   async getSummary() {
