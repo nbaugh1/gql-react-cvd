@@ -1,9 +1,11 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge'
 import Dump from './Dump'
+import moment from 'moment'
 
 const State = (props) => {
     const state = props.location.state.state
+    console.log()
     return (
         <div>
             <h2>{state.state}</h2>
@@ -21,7 +23,7 @@ const State = (props) => {
                     Recovered - {state.recovered}
                 </li>
                 <li>
-                    Last Updated - {state.dateChecked}
+                    Last Updated - {moment(state.dateChecked).format('L LT')}
                 </li>
             </ul>
             <Dump data={state} />
