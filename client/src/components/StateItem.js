@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'react-moment'
 
 export default function StateItem ({state}) {
   return (
@@ -7,6 +8,7 @@ export default function StateItem ({state}) {
       <div className='row'>
         <div className='col-md-9'>
           <h4>{state.state}</h4>
+          <h6>Date: {state.date}</h6>
           <p>{state.positive} Positive Cases</p>
           <p>{state.death} Deaths</p>
           <p>{state.hospitalized} Hospitalized</p>
