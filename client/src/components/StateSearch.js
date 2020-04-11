@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
 import StateItem from './StateItem'
-import Dump from '../components/Dump'
+// import Dump from '../components/Dump'
 
 const StateSearch = data => {
-    // debugger
-    const [searchTerm, setSearchTerm] = useState(null)
+    const [searchTerm, setSearchTerm] = useState(" ")
     const [searchResults, setSearchResults] = useState([]);
     const handleChange = event => {
         setSearchTerm(event.target.value)
@@ -19,13 +18,6 @@ const StateSearch = data => {
         setSearchResults(results)
     }, [searchTerm]);
 
-    // const handleSubmit = event => {
-    //     const resultComponent = <StateItem state={searchResults[0]} />
-    //     event.preventDefault()
-    //     console.log(searchResults)
-    //     debugger
-    // }
-
     return (
         <div style={{ margin: '10px' }}>
             <Form >
@@ -37,7 +29,6 @@ const StateSearch = data => {
                         value={searchTerm}
 
                     />
-                    {/* <Button variant='secondary' type="submit" value="Search" /> */}
                 </Form.Group>
 
             </Form>

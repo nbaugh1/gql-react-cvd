@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import moment from 'react-moment'
+import Card from 'react-bootstrap/Card'
 
-export default function StateItem ({state}) {
+export default function StateItem({ state }) {
   return (
-    <div className='card card-body mb-3'>
-      <div className='row'>
-        <div className='col-md-9'>
+    <Card>
+      <Card.Body>
+        <Card.Title>
           <h4>{state.state}</h4>
-          <h6>Date: {state.date}</h6>
-          <p>{state.positive} Positive Cases</p>
-          <p>{state.death} Deaths</p>
-          <p>{state.hospitalized} Hospitalized</p>
-        </div>
+        </Card.Title>
+        <h6>Date: {state.date}</h6>
+        <p>{state.positive} Positive Cases</p>
+        <p>{state.death} Deaths</p>
+        <p>{state.hospitalized} Hospitalized</p>
         <div className='col-md-3'>
           <Link
             to={{
@@ -23,10 +23,10 @@ export default function StateItem ({state}) {
             }}
             className='btn btn-secondary'
           >
-          Details
+            Details
           </Link>
         </div>
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   )
 }

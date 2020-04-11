@@ -4,9 +4,11 @@ import StateItem from './StateItem'
 
 const StatesList = (data) => {
     return (
-        data.state.states.map(state => (
-            <StateItem key={data.state} state={state} />
-        ))
+        <div className="states-container">
+        {data.state.states.map(state => (
+            <StateItem key={state.hash} state={state} />
+        ))}
+        </div>
     )
 }
 
