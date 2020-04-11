@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 
 export default function StateItem({ state }) {
   return (
-    <Card>
+    <Card style={{margin: '5px'}}>
       <Card.Body>
         <Card.Title>
           <h4>{state.state}</h4>
