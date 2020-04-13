@@ -8,21 +8,25 @@ import { StateOverviewContainer } from './components/containers/StateOverviewCon
 
 
 
-function App () {
- 
+function App() {
+
   return (
     <Router>
-      <div className='container'>
+      <div>
         <img
           src={logo}
           alt='Covid-19'
-          style={{ height: 200, margin: 'auto', display: 'block' }}
+          style={{ height: 200}}
         />
+      </div>
+      <div>
         <Link to="/" className='h1'>Covid-19 Tracker</Link>
+      </div>
+      <div>
         <Route exact path="/" component={StatesListContainer} />
         <Route exact path="/state/:state" component={StateOverviewContainer} />
       </div>
-      </Router>
+    </Router>
   )
 }
 
