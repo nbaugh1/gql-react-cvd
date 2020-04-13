@@ -1,29 +1,12 @@
 const { ApolloServer, gql } = require('apollo-server');
 const { RESTDataSource } = require('apollo-datasource-rest');
 
-
-
 const typeDefs = gql`
   
   type Query {
-    country(name: String!): Country,
     summary: Summary,
     states: [State],
-    countries: [Country],
     state(name: String!): [State]
-  }
-
-  type Country {
-    country: String,
-    cases: Int,
-    todayCases: Int,
-    deaths: Int,
-    todayDeaths: Int,
-    recovered: Int,
-    active: Int,
-    critical: Int,
-    casesPerOneMillion: Float,
-    deathsPerOneMillion: Float,
   }
 
   type Summary {
@@ -74,25 +57,19 @@ const typeDefs = gql`
     positiveIncrease: Int,
     totalTestResultsIncrease: Int
   }
-
-
-
 `;
 
 const resolvers = {
   Query: {
-    country: async (_source, { name }, { dataSources }) => {
-      return dataSources.covidAPI.getCountry(name);
-    },
     summary: async (_source, _, { dataSources }) => {
       return dataSources.covidAPI.getSummary();
     },
     states: async (_source, _, { dataSources }) => {
       return dataSources.covidAPI.getStates();
     },
-    countries: async (_source, _, { dataSources }) => {
-      return dataSources.covidAPI.getCountries();
-    },
+    // news: async (_source, _, { dataSources }) => {
+    //   return dataSources.covidAPI.getNews();
+    // }
   },
 }
 
@@ -106,9 +83,6 @@ class CovidAPI extends RESTDataSource {
   }
   async getSummary() {
     return this.get(`https://covidtracking.com/api/us`);
-  }
-  async getStateHistorical() {
-    return this.get(`https://covidtracking.com/api/v1/states/daily.json`);
   }
 }
 

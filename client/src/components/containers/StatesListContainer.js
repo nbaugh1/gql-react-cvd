@@ -6,7 +6,7 @@ import StatesList from '../StatesList'
 import StateSearch from '../StateSearch'
 
 const STATES_QUERY = gql`
-    {
+    query StatesList{
     states{
         date
         state
@@ -36,22 +36,16 @@ const STATES_QUERY = gql`
     }
 }
 `
-
-
 export const StatesListContainer = () => {
     const { data, loading, error } = useQuery(STATES_QUERY)
     if (loading) return <h4>Loading...</h4>
     if (error) console.log(error)
     return (
-        <Container>
-            <StateSearch states={data} />
         <div>
-            <StatesList state={data}/>
+            <StateSearch states={data} />
+            <StatesList state={data} />
         </div>
-            
-        </Container>
     )
 }
-
 
 export default StatesListContainer

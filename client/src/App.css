@@ -21,8 +21,4 @@ code {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-@media only screen and (max-width: 500px) {
-  body {
-    background-color: white;
-  }
-}
+
