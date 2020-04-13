@@ -9,7 +9,6 @@ import { StateOverviewContainer } from './components/containers/StateOverviewCon
 
 
 function App() {
-
   return (
     <Router>
       <div>
