@@ -1,10 +1,13 @@
 import React from 'react'
 import State from '../State'
 
-export const StateOverviewContainer = () => {
+
+
+export const StateOverviewContainer = (props) => {
+    
     return (
         <div>
-            {/* <State /> */}
+            <State state={props.location.state} />
         </div>
     )
 }
