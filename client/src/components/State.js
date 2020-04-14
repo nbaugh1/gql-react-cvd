@@ -1,6 +1,7 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge'
 import moment from 'moment'
+import { BarChart, XAxis } from 'recharts'
 
 const State = (props) => {
     
@@ -25,6 +26,9 @@ const State = (props) => {
                     Last Updated - {moment(state.dateChecked).format('L LT')}
                 </li>
             </ul>
+            <BarChart width={500} height={250} data={props.state}>
+                <XAxis dataKey={props.state}></XAxis>
+            </BarChart>
         </div>
             )
 }
